@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<style>
+    .default-block {
+        margin: 40px 100px 0;
+        padding: 0;
+    }
+    .header {
+        text-align: center;
+    }
+    .block-right {
+        text-align: right;
+        margin-bottom: 40px;
+    }
+    .block-normal {
+        word-break: normal;
+        margin-bottom: 40px;
+    }
+    body {
+        font-family: "Times New Roman", serif;
+        font-size: 25px;
+        margin: 40px 80px 20px;
+        line-height: 1.5;
+        padding: 0;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="header default-block">
+        <p>
+            МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РФ <br>
+            ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ <br>
+            ОБРАЗОВАТЕЛЬНОЕ УЧЕРЕЖДЕНИЕ  ВЫСШЕГО ОБРАЗОВАНИЯ <br>
+            «Воронежский государственный технический университет» <br>
+            ФГБОУ ВО «ВГТУ» <br> <br>
+            СПРАВКА № {!(NUMBER)}
+        </p>
+    </div>
+
+    <div class="block-right">
+        <p>
+            {!DATE}
+        </p>
+    </div>
+
+    <div class="block-normal">
+        Дана {!(NAME)} в том, что он (она) действительно является студенотом {!(CURSE)} 4 курса, {!(FACULTY)},
+        очного (дневного) обучения группы {!(GROUP)}, с {!DATE_поступления} планируемая дата окончания
+        обучения {!DATE_окончания_обучения}, обучение на {!TYPE_обучения} основе<br>
+        Справка выдана для предоставления {!Место_требования}<br>
+        <br>
+    </div>
+</body>
+</html>
