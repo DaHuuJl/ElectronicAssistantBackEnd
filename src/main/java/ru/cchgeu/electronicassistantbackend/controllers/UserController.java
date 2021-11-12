@@ -5,7 +5,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ru.cchgeu.electronicassistantbackend.services.impl.ReferenceImpl;
 import ru.cchgeu.electronicassistantbackend.services.impl.UserServiceImpl;
 
 @RestController
@@ -13,12 +12,10 @@ import ru.cchgeu.electronicassistantbackend.services.impl.UserServiceImpl;
 public class UserController {
 
     private final UserServiceImpl userService;
-    private final ReferenceImpl referenceService;
 
     @Autowired
-    public UserController(UserServiceImpl userService, ReferenceImpl referenceService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
-        this.referenceService = referenceService;
     }
 
 /*    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +32,6 @@ public class UserController {
 
     @RequestMapping(value = "/check", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String check() {
-        referenceService.getReference();
         return "Новая строка";
     }
 }
