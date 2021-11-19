@@ -9,8 +9,9 @@ import ru.cchgeu.electronicassistantbackend.model.entity.user.Type_training;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDto {
+public class UserReferenceDto {
 
+    private Long id;
     private String lastName;
     private String firstName;
     private String patronymic;
@@ -23,7 +24,7 @@ public class UserDto {
     private String locationsreferences;
 
     public String getFileName(){
-        return lastName + firstName + groupp;
+        return lastName + firstName + " " + groupp;
     }
 
     public String getFIO(){

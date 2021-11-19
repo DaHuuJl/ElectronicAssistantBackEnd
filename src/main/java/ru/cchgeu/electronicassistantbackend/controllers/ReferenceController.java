@@ -1,30 +1,35 @@
 package ru.cchgeu.electronicassistantbackend.controllers;
 
 
+import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import ru.cchgeu.electronicassistantbackend.model.dto.UserDto;
-import ru.cchgeu.electronicassistantbackend.services.impl.UserReference;
-import ru.cchgeu.electronicassistantbackend.utils.OperationResponse;
+import org.springframework.web.bind.annotation.*;
+import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
+import ru.cchgeu.electronicassistantbackend.services.impl.ReferenceService;
+
+import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/reference",produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ReferenceController {
 
-    private final UserReference userReference;
+    private final ReferenceService referenceService;
 
     @Autowired
-    public ReferenceController(UserReference userReference) {
-        this.userReference = userReference;
+    public ReferenceController(ReferenceService referenceService) {
+        this.referenceService = referenceService;
     }
 
-    @RequestMapping(value = "/referenceTraining", method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
-    public OperationResponse registrationNewUser(@RequestBody UserDto user){
-//        Users userEntity = UserMapper.MAPPER.toEntity(user);
-        return userReference.createReferenceTraining(user);
+    @PostMapping(path = "/reference-training")
+    public void registrationNewReference(@RequestBody UserReferenceDto userReferenceDto) throws IOException, WriterException{
+        referenceService.createReferenceTraining(userReferenceDto);
+    }
+
+    @GetMapping("/verification")
+    public Optional<User> verificationOfExistence(@RequestParam("uuid-reference") String uuidReference){
+        return referenceService.verificationQRCodeReference(uuidReference);
     }
 }

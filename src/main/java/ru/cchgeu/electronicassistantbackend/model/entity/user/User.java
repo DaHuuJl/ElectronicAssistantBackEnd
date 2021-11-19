@@ -6,14 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-
 
 @Getter
 @Setter
 @Entity(name = "users")
 @NoArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @Column(name = "user_id")
