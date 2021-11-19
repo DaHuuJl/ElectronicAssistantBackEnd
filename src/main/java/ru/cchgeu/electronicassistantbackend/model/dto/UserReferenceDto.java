@@ -24,7 +24,7 @@ public class UserReferenceDto {
     private String locationsreferences;
 
     public String getFileName(){
-        return lastName + firstName + groupp;
+        return lastName + firstName + " " + groupp;
     }
 
     public String getFIO(){

@@ -7,38 +7,50 @@ import ru.cchgeu.electronicassistantbackend.model.entity.references.Format_refer
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Status_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Type_reference;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
+import ru.cchgeu.electronicassistantbackend.repositories.UserRepository;
 import ru.cchgeu.electronicassistantbackend.utils.ConverterPDF;
-import ru.cchgeu.electronicassistantbackend.utils.OperationResponse;
 import ru.cchgeu.electronicassistantbackend.utils.QRCodeGeneration;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
 public class ReferenceService {
 
     private final ReferenceRepository referenceRepository;
+    private final UserRepository userRepository;
 
-    public ReferenceService(ReferenceRepository referenceRepository) {
-        this.referenceRepository = referenceRepository;
+    private static final Random RANDOM = new SecureRandom();
+
+    public static byte[] getNextSalt() {
+        byte[] salt = new byte[16];
+        RANDOM.nextBytes(salt);
+        return salt;
     }
 
-    public OperationResponse createReferenceTraining(UserReferenceDto userReferenceDto) throws IOException, WriterException {
+    public ReferenceService(ReferenceRepository referenceRepository, UserRepository userRepository) {
+        this.referenceRepository = referenceRepository;
+        this.userRepository = userRepository;
+    }
 
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
-        String dateCreating = formatForDateNow.format(dateNow);
+    public void createReferenceTraining(UserReferenceDto userReferenceDto) throws IOException, WriterException {
 
-        java.sql.Date dateCreatingReference = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-//        DataTime
-        UUID uuid = UUID.randomUUID();
+        LocalDateTime timeCreation= LocalDateTime.now();
 
-        String pathToQRC = "./src/main/resources/QRCodes/" + userReferenceDto.getId().toString() + "QRCode-" + dateCreating + ".jpg";
+        String aString = userReferenceDto.getId().toString() + timeCreation + getNextSalt();
+        String uuid = UUID.nameUUIDFromBytes(aString.getBytes()).toString();
+
+        String pathToQRC = "./src/main/resources/QRCodes/" + userReferenceDto.getId().toString() + "-QRCode-" + timeCreation + ".jpg";
         String urlApiCheckReference = "http://localhost:8082/api/reference/verification?uuid-reference=" + uuid;
+
         QRCodeGeneration QRCode = new QRCodeGeneration();
         QRCode.generatQRCode(urlApiCheckReference,pathToQRC);
         String referenceText = "<!DOCTYPE html>\n" +
@@ -84,7 +96,7 @@ public class ReferenceService {
                 "\n" +
                 "    <div class=\"block-right\">\n" +
                 "        <p>\n" +
-                "            "+ dateCreating +"\n" +
+                "            "+ timeCreation.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +"\n" +
                 "        </p>\n" +
                 "    </div>\n" +
                 "\n" +
@@ -100,19 +112,17 @@ public class ReferenceService {
                 "</html>";
 
         String pathToFile = "src/main/resources/referencesOK/";
+        String nameFile = pathToFile + userReferenceDto.getFileName()+ "-" + timeCreation + ".pdf";
 
         ConverterPDF convert = new ConverterPDF();
-        convert.convertert(referenceText,pathToFile + userReferenceDto.getFileName()+ "_" + dateCreating + ".pdf");
-        Reference reference = new Reference(uuid.toString(),userReferenceDto.getId(), Status_reference.READY ,dateCreatingReference, Type_reference.WORK, Format_reference.ELECTRONIC);
+        convert.convertert(referenceText, nameFile);
+        Reference reference = new Reference(uuid,userReferenceDto.getId(), Status_reference.READY ,timeCreation.toLocalDate(), Type_reference.WORK, Format_reference.ELECTRONIC);
         referenceRepository.save(reference);
-       return new OperationResponse("Pdf успешно создан!!!");
     }
 
-    public OperationResponse verificationQRCodeReference(String uuidReference) {
+    public Optional<User> verificationQRCodeReference(String uuidReference) {
 
-        if(referenceRepository.findById(uuidReference).isPresent())
-        {return new OperationResponse("Ok");}
-        return new OperationResponse("Bad");
+        return userRepository.findById(referenceRepository.findById(uuidReference).get().getStudent_id());
     }
 
 }

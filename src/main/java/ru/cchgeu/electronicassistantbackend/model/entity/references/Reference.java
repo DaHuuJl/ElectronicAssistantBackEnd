@@ -2,12 +2,10 @@ package ru.cchgeu.electronicassistantbackend.model.entity.references;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.UUID;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,7 +25,7 @@ public class Reference {
     private Type_reference type_reference;
 
     @Column(nullable = false)
-    private Date date_creation;
+    private LocalDate date_creation;
 
     @Enumerated(EnumType.STRING)
     private Format_reference format_reference;
@@ -36,7 +34,7 @@ public class Reference {
     private Status_reference status_reference;
 
 
-    public Reference(String uuid, Long id, Status_reference ready, Date dateCreating, Type_reference work, Format_reference electronic) {
+    public Reference(String uuid, Long id, Status_reference ready, LocalDate dateCreating, Type_reference work, Format_reference electronic) {
         this.id = uuid;
         this.student_id = id;
         this.type_reference = work;

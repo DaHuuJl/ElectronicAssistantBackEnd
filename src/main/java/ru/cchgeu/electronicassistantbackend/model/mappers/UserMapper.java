@@ -4,15 +4,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.Users;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 
 @Mapper(componentModel = "spring", uses = {})
-public interface UserMapper extends EntityMapper<Users, UserReferenceDto> {
+public interface UserMapper extends EntityMapper<User, UserReferenceDto> {
 
     UserMapper MAPPER = Mappers.getMapper(UserMapper.class);
     @Mapping(target = "userName", source = "name")
-    Users toEntity(UserReferenceDto dto);
+    User toEntity(UserReferenceDto dto);
 
     @Mapping(target = "name", source = "userName")
-    UserReferenceDto toDto(Users user);
+    UserReferenceDto toDto(User user);
 }
