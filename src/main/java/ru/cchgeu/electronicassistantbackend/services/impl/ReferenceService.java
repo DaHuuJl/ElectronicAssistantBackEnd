@@ -1,13 +1,16 @@
 package ru.cchgeu.electronicassistantbackend.services.impl;
 
 import com.google.zxing.WriterException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
+import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Format_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Status_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Type_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
+import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
 import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
 import ru.cchgeu.electronicassistantbackend.repositories.UserRepository;
 import ru.cchgeu.electronicassistantbackend.utils.ConverterPDF;
@@ -15,7 +18,6 @@ import ru.cchgeu.electronicassistantbackend.utils.QRCodeGeneration;
 
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -30,26 +32,35 @@ public class ReferenceService {
 
     private static final Random RANDOM = new SecureRandom();
 
+    private final UserMapper userMapper;
+
     public static byte[] getNextSalt() {
         byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
         return salt;
     }
 
-    public ReferenceService(ReferenceRepository referenceRepository, UserRepository userRepository) {
+    @Autowired
+    public ReferenceService(ReferenceRepository referenceRepository, UserRepository userRepository, UserMapper userMapper) {
         this.referenceRepository = referenceRepository;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
-    public void createReferenceTraining(UserReferenceDto userReferenceDto) throws IOException, WriterException {
+    public void createReferenceTraining(UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException {
 
         LocalDateTime timeCreation= LocalDateTime.now();
 
-        String aString = userReferenceDto.getId().toString() + timeCreation + getNextSalt();
+        String aString = userReferenceWorkDto.getStudent_id().toString() + timeCreation.toLocalDate() + getNextSalt();
         String uuid = UUID.nameUUIDFromBytes(aString.getBytes()).toString();
 
-        String pathToQRC = "./src/main/resources/QRCodes/" + userReferenceDto.getId().toString() + "-QRCode-" + timeCreation + ".jpg";
+        String pathToQRC = "./src/main/resources/QRCodes/" + userReferenceWorkDto.getStudent_id().toString() + "-QRCode-" + timeCreation + ".jpg";
         String urlApiCheckReference = "http://localhost:8082/api/reference/verification?uuid-reference=" + uuid;
+
+
+        UserReferenceDto  userReferenceDto =  userMapper.toDto(userRepository.findById(userReferenceWorkDto.getStudent_id()).get());
+
+
 
         QRCodeGeneration QRCode = new QRCodeGeneration();
         QRCode.generatQRCode(urlApiCheckReference,pathToQRC);

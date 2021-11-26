@@ -1,14 +1,21 @@
 package ru.cchgeu.electronicassistantbackend.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.Type_training;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserReferenceDto {
 
     private Long id;
