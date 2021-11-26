@@ -21,8 +21,8 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
     @Column(name = "first_name")
     private String firstName;
@@ -47,9 +47,6 @@ public class User {
 
     @Column(name = "type_training")
     private Type_training type_training;
-
-    @Column(name = "locationsreferences")
-    private String locationsreferences;
 
     @Column(name = "user_login")
     private String login;

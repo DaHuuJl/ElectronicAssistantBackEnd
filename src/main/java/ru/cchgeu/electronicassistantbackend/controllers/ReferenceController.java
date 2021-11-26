@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
+import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.services.impl.ReferenceService;
 
@@ -24,8 +25,8 @@ public class ReferenceController {
     }
 
     @PostMapping(path = "/reference-training")
-    public void registrationNewReference(@RequestBody UserReferenceDto userReferenceDto) throws IOException, WriterException{
-        referenceService.createReferenceTraining(userReferenceDto);
+    public void registrationNewReference(@RequestBody UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException{
+        referenceService.createReferenceTraining(userReferenceWorkDto);
     }
 
     @GetMapping("/verification")
