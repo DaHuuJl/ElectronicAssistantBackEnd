@@ -22,19 +22,19 @@ public class Reference {
     private Long employee_id;
 
     @Enumerated(EnumType.STRING)
-    private Type_reference type_reference;
+    private TypeReference type_reference;
 
     @Column(nullable = false)
     private LocalDate date_creation;
 
     @Enumerated(EnumType.STRING)
-    private Format_reference format_reference;
+    private FormatReference format_reference;
 
     @Enumerated(EnumType.STRING)
-    private Status_reference status_reference;
+    private StatusReference status_reference;
 
 
-    public Reference(String uuid, Long id, Status_reference ready, LocalDate dateCreating, Type_reference work, Format_reference electronic) {
+    public Reference(String uuid, Long id, StatusReference ready, LocalDate dateCreating, TypeReference work, FormatReference electronic) {
         this.id = uuid;
         this.student_id = id;
         this.type_reference = work;

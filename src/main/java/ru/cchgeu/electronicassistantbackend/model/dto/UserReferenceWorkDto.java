@@ -3,8 +3,8 @@ package ru.cchgeu.electronicassistantbackend.model.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.Format_reference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.Type_reference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.FormatReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.TypeReference;
 
 @Getter
 @Setter
@@ -12,6 +12,6 @@ import ru.cchgeu.electronicassistantbackend.model.entity.references.Type_referen
 public class UserReferenceWorkDto {
     private Long student_id;
     private String locationsreferences;
-    private Format_reference format_reference;
-    private Type_reference type_reference;
+    private FormatReference format_reference;
+    private TypeReference type_reference;
 }
