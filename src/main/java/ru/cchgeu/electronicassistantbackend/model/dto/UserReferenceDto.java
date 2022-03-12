@@ -4,7 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.TypeTraining;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Type_training;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 @Getter
@@ -22,7 +27,7 @@ public class UserReferenceDto {
     private String facultet;
     private String date_start;
     private String date_end;
-    private TypeTraining type_training;
+    private Type_training type_training;
     private String locationsreferences;
 
     public String getFileName(){

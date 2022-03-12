@@ -1,5 +1,5 @@
 package ru.cchgeu.electronicassistantbackend.model.entity.references;
 
-public enum TypeReference {
-    PERIOD, WORK
+public enum Format_reference {
+    PAPER, ELECTRONIC
 }

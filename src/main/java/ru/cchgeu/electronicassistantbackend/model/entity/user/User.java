@@ -46,7 +46,7 @@ public class User {
     private String date_end;
 
     @Column(name = "type_training")
-    private TypeTraining type_training;
+    private Type_training type_training;
 
     @Column(name = "user_login")
     private String login;

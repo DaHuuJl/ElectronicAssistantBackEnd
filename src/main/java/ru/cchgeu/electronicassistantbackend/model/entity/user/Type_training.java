@@ -1,11 +1,11 @@
 package ru.cchgeu.electronicassistantbackend.model.entity.user;
 
-public enum TypeTraining {
+public enum Type_training {
     BUDGET ("бюджетной"), COMMERCE ("контррактной"), TARGET ("целевое");
 
     private String type;
 
-    TypeTraining(String type) {
+    Type_training(String type) {
         this.type = type;
     }
 

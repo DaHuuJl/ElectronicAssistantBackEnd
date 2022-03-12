@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.FormatReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.Format_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.StatusReference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.TypeReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.Status_reference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.Type_reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
 import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
@@ -127,7 +127,7 @@ public class ReferenceService {
 
         ConverterPDF convert = new ConverterPDF();
         convert.convertert(referenceText, nameFile);
-        Reference reference = new Reference(uuid,userReferenceDto.getId(), StatusReference.READY ,timeCreation.toLocalDate(), TypeReference.WORK, FormatReference.ELECTRONIC);
+        Reference reference = new Reference(uuid,userReferenceDto.getId(), Status_reference.READY ,timeCreation.toLocalDate(), Type_reference.WORK, Format_reference.ELECTRONIC);
         referenceRepository.save(reference);
     }
 
