@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- CNT_REFERENCES (CNT = CONTENT) -->
+
+    <changeSet id="13-03-2022 - Create table CNT_REFERENCE" author="Daniil Smirnov">
+        <preConditions>
+            <not>
+                <tableExists tableName="CNT_REFERENCES"/>
+            </not>
+        </preConditions>
+        <createTable tableName="CNT_REFERENCES">
+            <column name="id"
+                    type="java.lang.String">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="student_id"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="employee_id"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="type_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_creation"
+                    type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="format_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- SEC_USERS (SEC = security) -->
+
+    <changeSet id="13-03-2022 - Create table SEC_USERS" author="Daniil Smirnov">
+        <preConditions>
+            <not>
+                <tableExists tableName="SEC_USERS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="SEC_USERS">
+            <column name="user_id"
+                    type="java.lang.Long">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="last_name"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="first_name"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="patronymic"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="course"
+                    type="java.lang.Integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="groupp"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="facultet"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_start"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_end"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_login"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_password"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--
+        Как работать с ченджсетами
+        https://docs.liquibase.com/install/tutorials/postgresql.html
+        https://habr.com/ru/post/548882/
+        https://liquibase.org
+    -->
+
+</databaseChangeLog>

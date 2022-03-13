@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity(name = "reference")
+@Entity(name = "CNT_REFERENCES")
 @AllArgsConstructor
 public class Reference {
     @Id
