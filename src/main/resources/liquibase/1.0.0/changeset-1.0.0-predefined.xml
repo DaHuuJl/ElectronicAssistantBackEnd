@@ -5,123 +5,151 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <!-- CNT_REFERENCES (CNT = CONTENT) -->
+    <changeSet id="25-03-2022 - Insert to STR_FACULTY"
+               author="Daniil Smirnov">
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="1"/>
+            <column  name="NAME"  value="Дорожно-транспортный факультет"/>
+            <column  name="ABBREVIATION"  value="ДТФ"/>
+        </insert>
 
-    <changeSet id="13-03-2022 - Create table CNT_REFERENCE" author="Daniil Smirnov">
-        <preConditions>
-            <not>
-                <tableExists tableName="CNT_REFERENCES"/>
-            </not>
-        </preConditions>
-        <createTable tableName="CNT_REFERENCES">
-            <column name="id"
-                    type="java.lang.String">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="2"/>
+            <column  name="NAME"  value="Культурно-просветительский факультет"/>
+            <column  name="ABBREVIATION"  value="КПФ"/>
+        </insert>
 
-            <column name="student_id"
-                    type="java.lang.Long">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="3"/>
+            <column  name="NAME"  value="Строительный факультет"/>
+            <column  name="ABBREVIATION"  value="СФ"/>
+        </insert>
 
-            <column name="employee_id"
-                    type="java.lang.Long">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="4"/>
+            <column  name="NAME"  value="Факультет архитектуры и градостроительства"/>
+            <column  name="ABBREVIATION"  value="ФАиГ"/>
+        </insert>
 
-            <column name="type_reference"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="5"/>
+            <column  name="NAME"  value="Факультет инженерных систем и сооружений"/>
+            <column  name="ABBREVIATION"  value="ФИСиС"/>
+        </insert>
 
-            <column name="date_creation"
-                    type="date">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="6"/>
+            <column  name="NAME"  value="Факультет информационных технологий и компьютерной безопасности"/>
+            <column  name="ABBREVIATION"  value="ФИТКБ"/>
+        </insert>
 
-            <column name="format_reference"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="7"/>
+            <column  name="NAME"  value="Факультет машиностроения и аэрокосмической техники"/>
+            <column  name="ABBREVIATION"  value="ФМАТ"/>
+        </insert>
 
-            <column name="status_reference"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="8"/>
+            <column  name="NAME"  value="Факультет радиотехники и электроники"/>
+            <column  name="ABBREVIATION"  value="ФРТЭ"/>
+        </insert>
+
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="9"/>
+            <column  name="NAME"  value="Факультет экономики, менеджмента и информационных технологий"/>
+            <column  name="ABBREVIATION"  value="ФЭМИТ"/>
+        </insert>
+
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="10"/>
+            <column  name="NAME"  value="Факультет энергетики и систем управления"/>
+            <column  name="ABBREVIATION"  value="ФЭСУ"/>
+        </insert>
+
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="11"/>
+            <column  name="NAME"  value="Институт международного образования"/>
+            <column  name="ABBREVIATION"  value="ИМО"/>
+        </insert>
+
+        <insert  tableName="STR_FACULTY">
+            <column  name="FACULTY_ID"  value="12"/>
+            <column  name="NAME"  value="Строительно-политехнический колледж"/>
+            <column  name="ABBREVIATION"  value="СПК"/>
+        </insert>
+
     </changeSet>
 
-    <!-- SEC_USERS (SEC = security) -->
+    <changeSet id="25-03-2022 - Insert to STR_DEPARTMENT"
+               author="Daniil Smirnov">
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="1"/>
+            <column  name="NAME"  value="Кафедра автоматизированных и вычислительных систем"/>
+            <column  name="ABBREVIATION"  value="АВС"/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
 
-    <changeSet id="13-03-2022 - Create table SEC_USERS" author="Daniil Smirnov">
-        <preConditions>
-            <not>
-                <tableExists tableName="SEC_USERS"/>
-            </not>
-        </preConditions>
-        <createTable tableName="SEC_USERS">
-            <column name="user_id"
-                    type="java.lang.Long">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="2"/>
+            <column  name="NAME"  value="Кафедра высшей математики и физико-математического моделирования"/>
+            <column  name="ABBREVIATION"  value=""/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
 
-            <column name="last_name"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="3"/>
+            <column  name="NAME"  value="Кафедра графики, конструирования и информационных технологий в промышленном дизайне"/>
+            <column  name="ABBREVIATION"  value=""/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
 
-            <column name="first_name"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="4"/>
+            <column  name="NAME"  value="Кафедра компьютерных интеллектуальных технологий проектирования"/>
+            <column  name="ABBREVIATION"  value="КИТП"/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
 
-            <column name="patronymic"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="5"/>
+            <column  name="NAME"  value="Кафедра систем автоматизированного проектирования и информационных систем"/>
+            <column  name="ABBREVIATION"  value="САПРИС"/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
 
-            <column name="course"
-                    type="java.lang.Integer">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="groupp"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="facultet"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="date_start"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="date_end"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="user_login"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="user_password"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+        <insert  tableName="STR_DEPARTMENT">
+            <column  name="DEPARTMENT_ID"  value="6"/>
+            <column  name="NAME"  value="Кафедра систем информационной безопасности"/>
+            <column  name="ABBREVIATION"  value="СИБ"/>
+            <column  name="FACULTY_ID"  value="6"/>
+        </insert>
     </changeSet>
 
-    <!--
-        Как работать с ченджсетами
-        https://docs.liquibase.com/install/tutorials/postgresql.html
-        https://habr.com/ru/post/548882/
-        https://liquibase.org
-    -->
+    <changeSet id="25-03-2022 - Insert to STR_GROUP"
+               author="Daniil Smirnov">
+        <insert  tableName="STR_GROUP">
+            <column  name="GROUP_ID"  value="1"/>
+            <column  name="NAME"  value="бАП-181"/>
+            <column  name="DEPARTMENT_ID"  value="5"/>
+        </insert>
+
+        <insert  tableName="STR_GROUP">
+            <column  name="GROUP_ID"  value="2"/>
+            <column  name="NAME"  value="бАМ-181"/>
+            <column  name="DEPARTMENT_ID"  value="4"/>
+        </insert>
+
+        <insert  tableName="STR_GROUP">
+            <column  name="GROUP_ID"  value="3"/>
+            <column  name="NAME"  value="бВМ-181"/>
+            <column  name="DEPARTMENT_ID"  value="6"/>
+        </insert>
+
+        <insert  tableName="STR_GROUP">
+            <column  name="NAME"  value="бВМ-171"/>
+            <column  name="DEPARTMENT_ID"  value="6"/>
+        </insert>
+    </changeSet>
 
 </databaseChangeLog>
