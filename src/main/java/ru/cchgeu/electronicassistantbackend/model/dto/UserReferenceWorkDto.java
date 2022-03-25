@@ -3,8 +3,8 @@ package ru.cchgeu.electronicassistantbackend.model.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.FormatReference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.TypeReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.FormatReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.TypeReference;
 
 @Getter
 @Setter

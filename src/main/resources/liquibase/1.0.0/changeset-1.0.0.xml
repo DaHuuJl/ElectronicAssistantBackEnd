@@ -5,4 +5,435 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+    <!--
+        USR = USER
+        CNT = CONTENT
+        SEC = security
+        STR = STRUCTURE
+        STD = STUDY
+    -->
+
+    <!-- STR_FACULTY -->
+
+    <changeSet id="13-03-2022 - Create table STR_FACULTY"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STR_FACULTY_FACULTY_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STR_FACULTY">
+            <column name="FACULTY_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STR_FACULTY_FACULTY_ID_SEQ')"
+                    defaultValue="nextval('STR_FACULTY_FACULTY_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="FACULTY_PK"/>
+            </column>
+
+            <column name="NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ABBREVIATION"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- STR_DEPARTMENT -->
+
+    <changeSet id="13-03-2022 - Create table STR_DEPARTMENT"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STR_DEPARTMENT_DEPARTMENT_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STR_DEPARTMENT">
+            <column name="DEPARTMENT_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STR_DEPARTMENT_DEPARTMENT_ID_SEQ')"
+                    defaultValue="nextval('STR_DEPARTMENT_DEPARTMENT_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="DEPARTMENT_PK"/>
+            </column>
+
+            <column name="NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ABBREVIATION"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="FACULTY_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="DEPARTMENT_FACULTY_FK"
+                             references="STR_FACULTY(FACULTY_ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- STR_GROUP -->
+
+    <changeSet id="13-03-2022 - Create table STR_GROUP"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STR_GROUP_GROUP_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STR_GROUP">
+            <column name="GROUP_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STR_GROUP_GROUP_ID_SEQ')"
+                    defaultValue="nextval('STR_GROUP_GROUP_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="GROUP_PK"/>
+            </column>
+
+            <column name="NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DEPARTMENT_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="GROUP_DEPARTMENT_FK"
+                             references="STR_DEPARTMENT(DEPARTMENT_ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- USR_STUDENT -->
+
+    <changeSet id="13-03-2022 - Create table USR_STUDENT"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="USR_STUDENT_STUDENT_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="USR_STUDENT">
+            <column name="STUDENT_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('USR_STUDENT_STUDENT_ID_SEQ')"
+                    defaultValue="nextval('USR_STUDENT_STUDENT_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="STUDENT_PK"/>
+            </column>
+
+            <column name="FULL_NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="GROUP_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="STUDENT_GROUP_FK"
+                             references="STR_GROUP(GROUP_ID)"/>
+            </column>
+
+            <column name="TUITION_TYPE"
+                    type="java.lang.STRING">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TUITION_FORM_TYPE"
+                    type="java.lang.STRING">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="START_DATE"
+                    type="java.sql.Types.DATE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="END_DATE"
+                    type="java.sql.date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- USR_TEACHER -->
+
+
+
+    <!-- CNT_REFERENCES -->
+    <!-- TODO: Исправить это -->
+
+    <changeSet id="13-03-2022 - Create table CNT_REFERENCE"
+               author="Daniil Smirnov">
+
+
+        <createTable tableName="CNT_REFERENCES">
+            <column name="id"
+                    type="java.lang.String">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="student_id"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="employee_id"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="type_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_creation"
+                    type="date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="format_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status_reference"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- SEC_USERS () -->
+    <!-- TODO: Исправить это (и USERS -> USER) -->
+
+    <changeSet id="13-03-2022 - Create table SEC_USERS"
+               author="Daniil Smirnov">
+        <createTable tableName="SEC_USERS">
+            <column name="user_id"
+                    type="java.lang.Long">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="last_name"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="first_name"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="patronymic"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="course"
+                    type="java.lang.Integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="groupp"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="facultet"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_start"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="date_end"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_login"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_password"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- STD_GRADEBOOK -->
+    <changeSet id="13-03-2022 - Create table STD_GRADEBOOK"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STD_GRADEBOOK_GRADEBOOK_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STD_GRADEBOOK">
+            <column name="GRADEBOOK_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STD_GRADEBOOK_GRADEBOOK_ID_SEQ')"
+                    defaultValue="nextval('STD_GRADEBOOK_GRADEBOOK_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="GRADEBOOK_PK"/>
+            </column>
+
+            <column name="GRADEBOOK_NUMBER"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="STUDENT_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="GRADEBOOK_STUDENT_FK"
+                             references="USR_STUDENT(STUDENT_ID)"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <!-- STD_SUBJECT_INFORMATION -->
+    <!-- TODO: связать с преподователем -->
+
+    <changeSet id="19-03-2022 - Create table STD_SUBJECT_INFORMATION"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STD_SUBJECT_INFORMATION_SUBJECT_INFORMATION_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STD_SUBJECT_INFORMATION">
+            <column name="SUBJECT_INFORMATION_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STD_SUBJECT_INFORMATION_SUBJECT_INFORMATION_ID_SEQ')"
+                    defaultValue="nextval('STD_SUBJECT_INFORMATION_SUBJECT_INFORMATION_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="SUBJECT_INFORMATION_PK"/>
+            </column>
+
+            <column name="TEACHER_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="SUBJECT"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="ATTESTATION_TYPE"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ASSESSMENT"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DATE"
+                    type="java.sql.Date">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TOPIC"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="PRACTICE_TYPE"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="PLACE_PRACTICE"
+                    type="java.lang.String">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- STD_SEMESTER_INFORMATION -->
+
+    <changeSet id="18-03-2022 - Create table STD_SEMESTER_INFORMATION"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="STD_SEMESTER_INFORMATION_SEMESTER_INFORMATION_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="STD_SEMESTER_INFORMATION">
+            <column name="SEMESTER_INFORMATION_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('STD_SEMESTER_INFORMATION_SEMESTER_INFORMATION_ID_SEQ')"
+                    defaultValue="nextval('STD_SEMESTER_INFORMATION_SEMESTER_INFORMATION_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="SEMESTER_INFORMATION_PK"/>
+            </column>
+
+            <column name="SEMESTER_NUMBER"
+                    type="java.lang.Long">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="GRADEBOOK_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="SEMESTER_INFORMATION_GRADEBOOK_FK"
+                             references="STD_GRADEBOOK(GRADEBOOK_ID)"/>
+            </column>
+
+            <column name="SUBJECT_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="SEMESTER_INFORMATION_SUBJECT_INFORMATION_FK"
+                             references="STD_SUBJECT_INFORMATION(SUBJECT_INFORMATION_ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--
+        Как работать с ченджсетами
+        https://docs.liquibase.com/install/tutorials/postgresql.html
+        https://habr.com/ru/post/548882/
+        https://liquibase.org
+    -->
+
 </databaseChangeLog>

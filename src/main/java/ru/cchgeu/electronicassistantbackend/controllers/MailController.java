@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.cchgeu.electronicassistantbackend.model.dto.MailMassage;
-import ru.cchgeu.electronicassistantbackend.services.impl.mail.MailSenderServiceImpl;
-import ru.cchgeu.electronicassistantbackend.services.impl.mail.TemplateEngineServiceImpl;
+import ru.cchgeu.electronicassistantbackend.services.mail.MailSenderServiceImpl;
+import ru.cchgeu.electronicassistantbackend.services.mail.TemplateEngineServiceImpl;
 
 /*
     TODO: Этот контроллер создан, чтобы проверить работает ли отправка сообщений, его нужно убрать в будущем
