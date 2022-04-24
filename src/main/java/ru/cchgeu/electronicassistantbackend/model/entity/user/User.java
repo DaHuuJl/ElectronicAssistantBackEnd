@@ -9,13 +9,13 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity(name = "users")
+@Entity(name = "SEC_USERS")
 @NoArgsConstructor
 public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy =  GenerationType.AUTO)
+    //@GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
 
     @Column(name = "last_name")
@@ -45,8 +45,8 @@ public class User {
     @Column(name = "date_end")
     private String date_end;
 
-    @Column(name = "type_training")
-    private TypeTraining type_training;
+/*    @Column(name = "type_training")
+    private TypeTraining type_training;*/
 
     @Column(name = "user_login")
     private String login;

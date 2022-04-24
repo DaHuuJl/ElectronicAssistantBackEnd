@@ -1,18 +1,18 @@
-package ru.cchgeu.electronicassistantbackend.services.impl;
+package ru.cchgeu.electronicassistantbackend.services.reference;
 
 import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.FormatReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.FormatReference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.StatusReference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.TypeReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.StatusReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.TypeReference;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
 import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
-import ru.cchgeu.electronicassistantbackend.repositories.UserRepository;
+import ru.cchgeu.electronicassistantbackend.repositories.user.UserRepository;
 import ru.cchgeu.electronicassistantbackend.utils.ConverterPDF;
 import ru.cchgeu.electronicassistantbackend.utils.QRCodeGeneration;
 
@@ -25,7 +25,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Service
-public class ReferenceService {
+public class ReferenceServiceImpl {
 
     private final ReferenceRepository referenceRepository;
     private final UserRepository userRepository;
@@ -40,8 +40,7 @@ public class ReferenceService {
         return salt;
     }
 
-    @Autowired
-    public ReferenceService(ReferenceRepository referenceRepository, UserRepository userRepository, UserMapper userMapper) {
+    public ReferenceServiceImpl(ReferenceRepository referenceRepository, UserRepository userRepository, UserMapper userMapper) {
         this.referenceRepository = referenceRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
