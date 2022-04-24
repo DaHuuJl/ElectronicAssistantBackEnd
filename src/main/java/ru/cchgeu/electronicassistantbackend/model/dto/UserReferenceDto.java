@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.TuitionType;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.TypeTraining;
 
 
 @Getter
@@ -22,7 +22,7 @@ public class UserReferenceDto {
     private String facultet;
     private String date_start;
     private String date_end;
-    private TuitionType type_training;
+    private TypeTraining type_training;
     private String locationsreferences;
 
     public String getFileName(){
