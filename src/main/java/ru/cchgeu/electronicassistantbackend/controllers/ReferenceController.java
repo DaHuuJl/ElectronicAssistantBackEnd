@@ -2,7 +2,6 @@ package ru.cchgeu.electronicassistantbackend.controllers;
 
 
 import com.google.zxing.WriterException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
@@ -18,7 +17,6 @@ public class ReferenceController {
 
     private final ReferenceServiceImpl referenceService;
 
-    @Autowired
     public ReferenceController(ReferenceServiceImpl referenceService) {
         this.referenceService = referenceService;
     }

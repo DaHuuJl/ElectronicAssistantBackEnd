@@ -40,7 +40,6 @@ public class ReferenceServiceImpl {
         return salt;
     }
 
-    @Autowired
     public ReferenceServiceImpl(ReferenceRepository referenceRepository, UserRepository userRepository, UserMapper userMapper) {
         this.referenceRepository = referenceRepository;
         this.userRepository = userRepository;

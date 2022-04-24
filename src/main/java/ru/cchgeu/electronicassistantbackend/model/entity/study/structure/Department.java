@@ -29,7 +29,4 @@ public class Department {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FACULTY_ID", nullable = false)
     private Faculty faculty;
-
-    @OneToMany(mappedBy ="department", fetch = FetchType.LAZY)
-    private List<Group> groupList;
 }

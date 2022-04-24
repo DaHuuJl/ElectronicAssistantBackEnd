@@ -1,6 +1,5 @@
 package ru.cchgeu.electronicassistantbackend.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +18,6 @@ public class MailController {
     private final MailSenderServiceImpl mailSenderService;
     private final TemplateEngineServiceImpl templateEngineService;
 
-    @Autowired
     public MailController(MailSenderServiceImpl mailSenderService, TemplateEngineServiceImpl templateEngineService) {
         this.mailSenderService = mailSenderService;
         this.templateEngineService = templateEngineService;
