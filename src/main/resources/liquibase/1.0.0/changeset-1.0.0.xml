@@ -112,11 +112,11 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="DEPARTMENT_ID"
+            <column name="FACULTY_ID"
                     type="java.lang.Long">
                 <constraints nullable="false"
-                             foreignKeyName="GROUP_DEPARTMENT_FK"
-                             references="STR_DEPARTMENT(DEPARTMENT_ID)"/>
+                             foreignKeyName="GROUP_FACULTY_FK"
+                             references="STR_FACULTY(FACULTY_ID)"/>
             </column>
         </createTable>
     </changeSet>
@@ -160,6 +160,16 @@
             </column>
 
             <column name="TUITION_FORM_TYPE"
+                    type="java.lang.STRING">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="TRAINING_LEVEL_TYPE"
+                    type="java.lang.STRING">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CONDITION_TYPE"
                     type="java.lang.STRING">
                 <constraints nullable="false"/>
             </column>

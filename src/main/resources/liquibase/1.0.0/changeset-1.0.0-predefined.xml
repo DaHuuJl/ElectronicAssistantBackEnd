@@ -131,24 +131,24 @@
         <insert  tableName="STR_GROUP">
             <column  name="GROUP_ID"  value="1"/>
             <column  name="NAME"  value="бАП-181"/>
-            <column  name="DEPARTMENT_ID"  value="5"/>
+            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_GROUP">
             <column  name="GROUP_ID"  value="2"/>
             <column  name="NAME"  value="бАМ-181"/>
-            <column  name="DEPARTMENT_ID"  value="4"/>
+            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_GROUP">
             <column  name="GROUP_ID"  value="3"/>
             <column  name="NAME"  value="бВМ-181"/>
-            <column  name="DEPARTMENT_ID"  value="6"/>
+            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_GROUP">
             <column  name="NAME"  value="бВМ-171"/>
-            <column  name="DEPARTMENT_ID"  value="6"/>
+            <column  name="FACULTY_ID"  value="6"/>
         </insert>
     </changeSet>
 

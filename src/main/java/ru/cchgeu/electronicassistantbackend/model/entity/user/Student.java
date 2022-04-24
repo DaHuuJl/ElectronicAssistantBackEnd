@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.Gradebook;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.structure.Group;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.ConditionType;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.TrainingLevelType;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.TuitionFormType;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.TuitionType;
 
@@ -41,6 +43,14 @@ public class Student {
     @Column(name = "TUITION_FORM_TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
     private TuitionFormType tuitionFormType;
+
+    @Column(name = "TRAINING_LEVEL_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TrainingLevelType trainingLevelType;
+
+    @Column(name = "CONDITION_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ConditionType conditionType;
 
     @Column(name = "START_DATE", nullable = false)
     private Date startDate;

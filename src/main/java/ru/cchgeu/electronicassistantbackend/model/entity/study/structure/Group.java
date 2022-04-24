@@ -25,8 +25,8 @@ public class Group {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DEPARTMENT_ID", nullable = false)
-    private Department department;
+    @JoinColumn(name = "FACULTY_ID", nullable = false)
+    private Faculty faculty;
 
     @OneToMany(mappedBy ="group", fetch = FetchType.LAZY)
     private List<Student> studentList;
