@@ -1,4 +1,4 @@
-package ru.cchgeu.electronicassistantbackend.services.reference;
+package ru.cchgeu.electronicassistantbackend.services;
 
 public interface ReferenceService {
 
