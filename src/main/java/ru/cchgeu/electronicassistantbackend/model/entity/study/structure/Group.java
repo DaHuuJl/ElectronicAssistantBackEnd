@@ -1,5 +1,6 @@
 package ru.cchgeu.electronicassistantbackend.model.entity.study.structure;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 @Entity(name = "STR_GROUP")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Group {
     @Id
     @Column(name = "GROUP_ID", nullable = false)
