@@ -188,7 +188,33 @@
 
     <!-- USR_TEACHER -->
 
+    <!-- USR_STUDENT -->
 
+    <changeSet id="26-04-2022 - Create table USR_TEACHER"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="USR_TEACHER_TEACHER_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="USR_TEACHER">
+            <column name="TEACHER_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('USR_TEACHER_TEACHER_ID_SEQ')"
+                    defaultValue="nextval('USR_TEACHER_TEACHER_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="TEACHER_PK"/>
+            </column>
+
+            <column name="FULL_NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
     <!-- CNT_REFERENCES -->
     <!-- TODO: Исправить это -->
@@ -334,7 +360,6 @@
     </changeSet>
 
     <!-- STD_SUBJECT_INFORMATION -->
-    <!-- TODO: связать с преподователем -->
 
     <changeSet id="19-03-2022 - Create table STD_SUBJECT_INFORMATION"
                author="Daniil Smirnov">
@@ -357,7 +382,9 @@
 
             <column name="TEACHER_ID"
                     type="java.lang.Long">
-                <constraints nullable="false"/>
+                <constraints nullable="false"
+                             foreignKeyName="SUBJECT_INFORMATION_TEACHER_FK"
+                             references="USR_TEACHER(TEACHER_ID)"/>
             </column>
 
             <column name="SUBJECT"

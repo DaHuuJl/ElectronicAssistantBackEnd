@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.enums.AttestationType;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.enums.PracticeType;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Teacher;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -23,9 +24,9 @@ public class SubjectInformation {
             sequenceName = "STD_SUBJECT_INFORMATION_SUBJECT_INFORMATION_ID_SEQ", allocationSize = 1)
     private Long id;
 
-    //TODO: связать с преподователем
-    @Column(name = "TEACHER_ID", nullable = false)
-    private Long teacher;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEACHER_ID", nullable = false)
+    private Teacher teacher;
 
     @Column(name = "SUBJECT")
     private String subject;
