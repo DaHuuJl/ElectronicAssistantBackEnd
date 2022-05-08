@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.enums.AttestationType;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.enums.PracticeType;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.Teacher;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Employee;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -25,8 +25,8 @@ public class SubjectInformation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEACHER_ID", nullable = false)
-    private Teacher teacher;
+    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
+    private Employee employee;
 
     @Column(name = "SUBJECT")
     private String subject;
