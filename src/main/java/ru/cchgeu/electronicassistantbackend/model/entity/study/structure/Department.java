@@ -3,6 +3,7 @@ package ru.cchgeu.electronicassistantbackend.model.entity.study.structure;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Employee;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,7 +27,6 @@ public class Department {
     @Column(name = "ABBREVIATION")
     private String abbreviation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FACULTY_ID", nullable = false)
-    private Faculty faculty;
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
+    private List<Employee> employeeList;
 }

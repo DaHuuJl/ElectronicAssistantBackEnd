@@ -1,52 +1,52 @@
 package ru.cchgeu.electronicassistantbackend.model.entity.references;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.FormatReference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.StatusReference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.TypeReference;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Employee;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.Student;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Getter
 @Setter
 @Entity(name = "CNT_REFERENCES")
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Reference {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private String id;
 
-    @Column(nullable = false)
-    private Long student_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STUDENT_ID", nullable = false)
+    private Student student;
 
-    private Long employee_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EMPLOYEE_ID")
+    private Employee employee;
 
+    @Column(name = "TYPE_REFERENCE", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TypeReference type_reference;
+    private TypeReference typeReference;
 
-    @Column(nullable = false)
-    private LocalDate date_creation;
-
+    @Column(name = "FORMAT_REFERENCE", nullable = false)
     @Enumerated(EnumType.STRING)
-    private FormatReference format_reference;
+    private FormatReference formatReference;
 
+    @Column(name = "STATUS_REFERENCE", nullable = false)
     @Enumerated(EnumType.STRING)
-    private StatusReference status_reference;
+    private StatusReference statusReference;
 
+    @Column(name = "PLACE_PRESENTATION", nullable = false)
+    private String placePresentation;
 
-    public Reference(String uuid, Long id, StatusReference ready, LocalDate dateCreating, TypeReference work, FormatReference electronic) {
-        this.id = uuid;
-        this.student_id = id;
-        this.type_reference = work;
-        this.date_creation = dateCreating;
-        this.format_reference = electronic;
-        this.status_reference = ready;
-    }
+    @Column(name = "DATE_CREATION_REQUEST", nullable = false)
+    private Date dateCreationRequest;
 
-    public Reference() {
-
-    }
+    @Column(name = "DATE_CREATION_REFERENCE")
+    private Date dateCreationReference;
 }

@@ -1,7 +1,9 @@
 package ru.cchgeu.electronicassistantbackend.services.reference;
 
-public interface ReferenceService {
+import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestDTO;
 
-    void createReference();
-    void verifivationReference();
+public interface ReferenceService {
+    void createReference(ReferenceRequestDTO referenceRequestDTO);
+/*    void createReference();
+    void verifivationReference();*/
 }

@@ -1,35 +1,23 @@
 package ru.cchgeu.electronicassistantbackend.services.reference;
 
-import com.google.zxing.WriterException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceDto;
-import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.FormatReference;
+import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestDTO;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.StatusReference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.TypeReference;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
 import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
 import ru.cchgeu.electronicassistantbackend.repositories.user.UserRepository;
-import ru.cchgeu.electronicassistantbackend.utils.ConverterPDF;
-import ru.cchgeu.electronicassistantbackend.utils.QRCodeGeneration;
+import ru.cchgeu.electronicassistantbackend.services.user.StudentServiceImpl;
 
-import java.io.IOException;
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
-public class ReferenceServiceImpl {
+public class ReferenceServiceImpl implements ReferenceService{
 
     private final ReferenceRepository referenceRepository;
     private final UserRepository userRepository;
-
+    private final StudentServiceImpl studentService;
     private static final Random RANDOM = new SecureRandom();
 
     private final UserMapper userMapper;
@@ -40,15 +28,37 @@ public class ReferenceServiceImpl {
         return salt;
     }
 
-    public ReferenceServiceImpl(ReferenceRepository referenceRepository, UserRepository userRepository, UserMapper userMapper) {
+    public ReferenceServiceImpl(ReferenceRepository referenceRepository, UserRepository userRepository, StudentServiceImpl studentService, UserMapper userMapper) {
         this.referenceRepository = referenceRepository;
         this.userRepository = userRepository;
+        this.studentService = studentService;
         this.userMapper = userMapper;
     }
 
-    public void createReferenceTraining(UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException {
+    public void createRequestForReference(List<ReferenceRequestDTO> referenceRequestDTOList) {
+        referenceRequestDTOList
+                .forEach(this::createReference);
+    }
 
-        LocalDateTime timeCreation= LocalDateTime.now();
+    @Override
+    public void createReference(ReferenceRequestDTO referenceRequestDTO) {
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        Reference reference = new Reference();
+        reference.setId(UUID.randomUUID().toString());
+        reference.setFormatReference(referenceRequestDTO.getFormatReference());
+        reference.setTypeReference(referenceRequestDTO.getTypeReference());
+        reference.setStatusReference(StatusReference.PROCESS);
+        reference.setPlacePresentation(referenceRequestDTO.getPlacePresentation());
+        reference.setDateCreationRequest(sqlDate);
+        reference.setStudent(studentService.findById(1L));
+        referenceRepository.save(reference);
+        System.out.println("Создано: " + reference.toString());
+    }
+
+/*    public void createReferenceTraining(UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException {
+
+        LocalDateTime timeCreation = LocalDateTime.now();
 
         String aString = userReferenceWorkDto.getStudent_id().toString() + timeCreation.toLocalDate() + getNextSalt();
         String uuid = UUID.nameUUIDFromBytes(aString.getBytes()).toString();
@@ -133,6 +143,6 @@ public class ReferenceServiceImpl {
     public Optional<User> verificationQRCodeReference(String uuidReference) {
 
         return userRepository.findById(referenceRepository.findById(uuidReference).get().getStudent_id());
-    }
+    }*/
 
 }

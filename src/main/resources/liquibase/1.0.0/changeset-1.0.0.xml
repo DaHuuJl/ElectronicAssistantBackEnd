@@ -6,9 +6,9 @@
                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <!--
+        SEC = security
         USR = USER
         CNT = CONTENT
-        SEC = security
         STR = STRUCTURE
         STD = STUDY
     -->
@@ -76,13 +76,6 @@
                     type="java.lang.String">
                 <constraints nullable="true"/>
             </column>
-
-            <column name="FACULTY_ID"
-                    type="java.lang.Long">
-                <constraints nullable="false"
-                             foreignKeyName="DEPARTMENT_FACULTY_FK"
-                             references="STR_FACULTY(FACULTY_ID)"/>
-            </column>
         </createTable>
     </changeSet>
 
@@ -121,6 +114,66 @@
         </createTable>
     </changeSet>
 
+    <!-- SEC_USER -->
+
+    <changeSet id="13-03-2022 - Create table SEC_USER"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="SEC_USER_USER_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="SEC_USER">
+            <column name="USER_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('USR_STUDENT_STUDENT_ID_SEQ')"
+                    defaultValue="nextval('SEC_USER_USER_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="USER_PK"/>
+            </column>
+
+            <column name="LAST_NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="FIRST_NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="PATRONYMIC"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="EMAIL"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ROLE"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="GROUP_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="STUDENT_GROUP_FK"
+                             references="STR_GROUP(GROUP_ID)"/>
+            </column>
+
+            <column name="TUITION_TYPE"
+                    type="java.lang.STRING">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <!-- USR_STUDENT -->
 
     <changeSet id="13-03-2022 - Create table USR_STUDENT"
@@ -143,6 +196,11 @@
             </column>
 
             <column name="FULL_NAME"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="EMAIL"
                     type="java.lang.String">
                 <constraints nullable="false"/>
             </column>
@@ -183,35 +241,99 @@
                     type="java.sql.date">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="USER_ID"
+                    type="java.lang.Long">
+                <constraints nullable="true"
+                             foreignKeyName="STUDENT_USER_FK"
+                             references="SEC_USER(USER_ID)"/>
+            </column>
         </createTable>
     </changeSet>
 
-    <!-- USR_TEACHER -->
+    <!-- USR_EMPLOYEE -->
 
-    <!-- USR_STUDENT -->
-
-    <changeSet id="26-04-2022 - Create table USR_TEACHER"
+    <changeSet id="26-04-2022 - Create table USR_EMPLOYEE"
                author="Daniil Smirnov">
 
         <createSequence
-                sequenceName="USR_TEACHER_TEACHER_ID_SEQ"
+                sequenceName="USR_EMPLOYEE_EMPLOYEE_ID_SEQ"
                 cycle="false"
                 startValue="1000"
                 incrementBy="1"/>
 
-        <createTable tableName="USR_TEACHER">
-            <column name="TEACHER_ID"
+        <createTable tableName="USR_EMPLOYEE">
+            <column name="EMPLOYEE_ID"
                     type="java.lang.Long"
-                    valueSequenceNext="nextval('USR_TEACHER_TEACHER_ID_SEQ')"
-                    defaultValue="nextval('USR_TEACHER_TEACHER_ID_SEQ')">
+                    valueSequenceNext="nextval('USR_EMPLOYEE_EMPLOYEE_ID_SEQ')"
+                    defaultValue="nextval('USR_EMPLOYEE_EMPLOYEE_ID_SEQ')">
                 <constraints nullable="false"
                              primaryKey="true"
-                             primaryKeyName="TEACHER_PK"/>
+                             primaryKeyName="EMPLOYEE_PK"/>
             </column>
 
             <column name="FULL_NAME"
                     type="java.lang.String">
                 <constraints nullable="false"/>
+            </column>
+
+            <column name="EMAIL"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="POST"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DEPARTMENT_ID"
+                    type="java.lang.Long">
+                <constraints nullable="true"
+                             foreignKeyName="EMPLOYEE_DEPARTMENT_FK"
+                             references="STR_DEPARTMENT(DEPARTMENT_ID)"/>
+            </column>
+
+            <column name="USER_ID"
+                    type="java.lang.Long">
+                <constraints nullable="true"
+                             foreignKeyName="EMPLOYEE_USER_FK"
+                             references="SEC_USER(USER_ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- SEC_PERMISSIONS -->
+
+    <changeSet id="08-05-2022 - Create table SEC_USER_PERMISSIONS"
+               author="Daniil Smirnov">
+
+        <createSequence
+                sequenceName="SEC_PERMISSIONS_USER_PERMISSIONS_ID_SEQ"
+                cycle="false"
+                startValue="1000"
+                incrementBy="1"/>
+
+        <createTable tableName="SEC_USER_PERMISSIONS">
+            <column name="USER_PERMISSIONS_ID"
+                    type="java.lang.Long"
+                    valueSequenceNext="nextval('SEC_PERMISSIONS_USER_PERMISSIONS_ID_SEQ')"
+                    defaultValue="nextval('SEC_PERMISSIONS_USER_PERMISSIONS_ID_SEQ')">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="USER_PERMISSIONS_PK"/>
+            </column>
+
+            <column name="PERMISSION"
+                    type="java.lang.String">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="USER_ID"
+                    type="java.lang.Long">
+                <constraints nullable="false"
+                             foreignKeyName="USER_PERMISSIONS_USER_FK"
+                             references="SEC_USER(USER_ID)"/>
             </column>
         </createTable>
     </changeSet>
@@ -222,104 +344,54 @@
     <changeSet id="13-03-2022 - Create table CNT_REFERENCE"
                author="Daniil Smirnov">
 
-
         <createTable tableName="CNT_REFERENCES">
-            <column name="id"
+            <column name="ID"
                     type="java.lang.String">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="student_id"
+            <column name="STUDENT_ID"
                     type="java.lang.Long">
-                <constraints nullable="false"/>
+                <constraints nullable="false"
+                             foreignKeyName="REFERENCES_STUDENT_FK"
+                             references="USR_STUDENT(STUDENT_ID)"/>
             </column>
 
-            <column name="employee_id"
+            <column name="EMPLOYEE_ID"
                     type="java.lang.Long">
-                <constraints nullable="false"/>
+                <constraints nullable="true"
+                             foreignKeyName="REFERENCES_EMPLOYEE_FK"
+                             references="USR_EMPLOYEE(EMPLOYEE_ID)"/>
             </column>
 
-            <column name="type_reference"
+            <column name="TYPE_REFERENCE"
                     type="java.lang.String">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="date_creation"
-                    type="date">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="format_reference"
+            <column name="FORMAT_REFERENCE"
                     type="java.lang.String">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="status_reference"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <!-- SEC_USERS () -->
-    <!-- TODO: Исправить это (и USERS -> USER) -->
-
-    <changeSet id="13-03-2022 - Create table SEC_USERS"
-               author="Daniil Smirnov">
-        <createTable tableName="SEC_USERS">
-            <column name="user_id"
-                    type="java.lang.Long">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="last_name"
+            <column name="STATUS_REFERENCE"
                     type="java.lang.String">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="first_name"
+            <column name="PLACE_PRESENTATION"
                     type="java.lang.String">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="patronymic"
-                    type="java.lang.String">
+            <column name="DATE_CREATION_REQUEST"
+                    type="java.sql.Date">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="course"
-                    type="java.lang.Integer">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="groupp"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="facultet"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="date_start"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="date_end"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="user_login"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="user_password"
-                    type="java.lang.String">
-                <constraints nullable="false"/>
+            <column name="DATE_CREATION_REFERENCE"
+                    type="java.sql.Date">
+                <constraints nullable="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -380,11 +452,11 @@
                              primaryKeyName="SUBJECT_INFORMATION_PK"/>
             </column>
 
-            <column name="TEACHER_ID"
+            <column name="EMPLOYEE_ID"
                     type="java.lang.Long">
                 <constraints nullable="false"
-                             foreignKeyName="SUBJECT_INFORMATION_TEACHER_FK"
-                             references="USR_TEACHER(TEACHER_ID)"/>
+                             foreignKeyName="SUBJECT_INFORMATION_EMPLOYEE_FK"
+                             references="USR_EMPLOYEE(EMPLOYEE_ID)"/>
             </column>
 
             <column name="SUBJECT"

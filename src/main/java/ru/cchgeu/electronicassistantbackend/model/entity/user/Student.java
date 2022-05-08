@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.gradebook.Gradebook;
 import ru.cchgeu.electronicassistantbackend.model.entity.study.structure.Group;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.ConditionType;
@@ -32,6 +33,9 @@ public class Student {
     @Column(name = "FULL_NAME", nullable = false)
     private String fullName;
 
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GROUP_ID", nullable = false)
     private Group group;
@@ -58,6 +62,19 @@ public class Student {
     @Column(name = "END_DATE", nullable = false)
     private Date endDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
+    private User user;
+
+    /*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", nullable = true)
+    private User user;
+     */
+
     @OneToMany(mappedBy ="student", fetch = FetchType.LAZY)
     private List<Gradebook> gradebookList;
+
+    @OneToMany(mappedBy ="student", fetch = FetchType.LAZY)
+    private List<Reference> referenceList;
 }

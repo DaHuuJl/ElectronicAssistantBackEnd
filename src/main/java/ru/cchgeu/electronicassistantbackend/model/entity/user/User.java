@@ -4,53 +4,56 @@ package ru.cchgeu.electronicassistantbackend.model.entity.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.cchgeu.electronicassistantbackend.model.entity.security.UserPermissions;
+import ru.cchgeu.electronicassistantbackend.model.entity.user.enums.Role;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
-@Entity(name = "SEC_USERS")
+@Entity(name = "SEC_USER")
 @NoArgsConstructor
 public class User {
 
     @Id
-    @Column(name = "user_id")
-    //@GeneratedValue(strategy =  GenerationType.AUTO)
+    @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "SEC_USER_USER_ID_SEQ_GEN")
+    @SequenceGenerator(name = "SEC_USER_USER_ID_SEQ_GEN",
+            sequenceName = "SEC_USER_USER_ID_SEQ", allocationSize = 1)
     private Long id;
 
-    @Column(name = "last_name")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
-
-    @Column(name = "first_name")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "patronymic")
+    @Column(name = "PATRONYMIC")
     private String patronymic;
 
-    @Column(name = "course")
-    private Integer course;
+    @Column(name = "EMAIL")
+    private String email;
 
-    @Column(name = "groupp")
-    private String groupp;
+    @Column(name = "ROLE")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    @Column(name = "facultet")
-    private String facultet;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<UserPermissions> userPermissionsList;
 
-    @Column(name = "date_start")
-    private String date_start;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Employee employeeVersion;
 
-    @Column(name = "date_end")
-    private String date_end;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Student studentVersion;
 
-/*    @Column(name = "type_training")
-    private TypeTraining type_training;*/
+    /*
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Employee> employeeVersion;
 
-    @Column(name = "user_login")
-    private String login;
-
-    @Column(name = "user_password")
-    private String password;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Student> studentVersion;
+    */
 }

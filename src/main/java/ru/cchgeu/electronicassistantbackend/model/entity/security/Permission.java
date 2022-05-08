@@ -1,4 +1,4 @@
-package ru.cchgeu.electronicassistantbackend.model.entity.user.enums;
+package ru.cchgeu.electronicassistantbackend.model.entity.security;
 
 public enum Permission {
     CONFIRMATION_OF_STATEMENTS_AND_DIRECTIONS, //Подтверждение ведомостей и направлений

@@ -87,42 +87,36 @@
             <column  name="DEPARTMENT_ID"  value="1"/>
             <column  name="NAME"  value="Кафедра автоматизированных и вычислительных систем"/>
             <column  name="ABBREVIATION"  value="АВС"/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_DEPARTMENT">
             <column  name="DEPARTMENT_ID"  value="2"/>
             <column  name="NAME"  value="Кафедра высшей математики и физико-математического моделирования"/>
             <column  name="ABBREVIATION"  value=""/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_DEPARTMENT">
             <column  name="DEPARTMENT_ID"  value="3"/>
             <column  name="NAME"  value="Кафедра графики, конструирования и информационных технологий в промышленном дизайне"/>
             <column  name="ABBREVIATION"  value=""/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_DEPARTMENT">
             <column  name="DEPARTMENT_ID"  value="4"/>
             <column  name="NAME"  value="Кафедра компьютерных интеллектуальных технологий проектирования"/>
             <column  name="ABBREVIATION"  value="КИТП"/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_DEPARTMENT">
             <column  name="DEPARTMENT_ID"  value="5"/>
             <column  name="NAME"  value="Кафедра систем автоматизированного проектирования и информационных систем"/>
             <column  name="ABBREVIATION"  value="САПРИС"/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
 
         <insert  tableName="STR_DEPARTMENT">
             <column  name="DEPARTMENT_ID"  value="6"/>
             <column  name="NAME"  value="Кафедра систем информационной безопасности"/>
             <column  name="ABBREVIATION"  value="СИБ"/>
-            <column  name="FACULTY_ID"  value="6"/>
         </insert>
     </changeSet>
 
@@ -152,4 +146,87 @@
         </insert>
     </changeSet>
 
+    <changeSet id="28-04-2022 - Insert to USR_EMPLOYEE" author="Daniil Smirnov">
+        <insert  tableName="USR_EMPLOYEE">
+            <column  name="EMPLOYEE_ID"  value="1"/>
+            <column  name="EMAIL"  value="test1@vgtu.ru"/>
+            <column  name="FULL_NAME"  value="Яскевич Ольга Георгиевна"/>
+            <column  name="POST"  value="Доцент"/>
+        </insert>
+
+        <insert  tableName="USR_EMPLOYEE">
+            <column  name="EMPLOYEE_ID"  value="2"/>
+            <column  name="EMAIL"  value="test2@vgtu.ru"/>
+            <column  name="FULL_NAME"  value="Минаева Юлия Васильевна"/>
+            <column  name="POST"  value="Доцент"/>
+        </insert>
+
+        <insert  tableName="USR_EMPLOYEE">
+            <column  name="EMPLOYEE_ID"  value="3"/>
+            <column  name="EMAIL"  value="test3@vgtu.ru"/>
+            <column  name="FULL_NAME"  value="Воробьёв Эдуард Игоревич"/>
+            <column  name="POST"  value="Доцент"/>
+        </insert>
+
+        <insert  tableName="USR_EMPLOYEE">
+            <column  name="EMPLOYEE_ID"  value="4"/>
+            <column  name="EMAIL"  value="test4@vgtu.ru"/>
+            <column  name="FULL_NAME"  value="Королёв Евгений Николаевич"/>
+            <column  name="POST"  value="Доцент"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="28-04-2022 - Insert to USR_STUDENT" author="Daniil Smirnov">
+        <insert  tableName="USR_STUDENT">
+            <column  name="STUDENT_ID"  value="1"/>
+            <column  name="FULL_NAME"  value="Смирнов Даниил Ярославович"/>
+            <column  name="EMAIL"  value="danyil.smirnov@yahoo.com"/>
+            <column  name="GROUP_ID"  value="1"/>
+            <column  name="TUITION_TYPE"  value="BUDGET"/>
+            <column  name="TUITION_FORM_TYPE"  value="FULL_TIME_TUITION"/>
+            <column  name="TRAINING_LEVEL_TYPE"  value="BACHELOR"/>
+            <column  name="CONDITION_TYPE"  value="IS_STUDENT"/>
+            <column  name="START_DATE"  value="2018-09-01"/>
+            <column  name="END_DATE"  value="2022-08-30"/>
+        </insert>
+
+        <insert  tableName="USR_STUDENT">
+            <column  name="STUDENT_ID"  value="2"/>
+            <column  name="FULL_NAME"  value="Филатов Михаил Александрович"/>
+            <column  name="EMAIL"  value="venart-1@yandex.ru"/>
+            <column  name="GROUP_ID"  value="1"/>
+            <column  name="TUITION_TYPE"  value="BUDGET"/>
+            <column  name="TUITION_FORM_TYPE"  value="FULL_TIME_TUITION"/>
+            <column  name="TRAINING_LEVEL_TYPE"  value="BACHELOR"/>
+            <column  name="CONDITION_TYPE"  value="IS_STUDENT"/>
+            <column  name="START_DATE"  value="2018-09-01"/>
+            <column  name="END_DATE"  value="2022-08-30"/>
+        </insert>
+
+        <insert  tableName="USR_STUDENT">
+            <column  name="STUDENT_ID"  value="3"/>
+            <column  name="FULL_NAME"  value="Ишкова Арина Денисовна"/>
+            <column  name="EMAIL"  value="venart-2@yandex.ru"/>
+            <column  name="GROUP_ID"  value="1"/>
+            <column  name="TUITION_TYPE"  value="BUDGET"/>
+            <column  name="TUITION_FORM_TYPE"  value="FULL_TIME_TUITION"/>
+            <column  name="TRAINING_LEVEL_TYPE"  value="BACHELOR"/>
+            <column  name="CONDITION_TYPE"  value="IS_STUDENT"/>
+            <column  name="START_DATE"  value="2018-09-01"/>
+            <column  name="END_DATE"  value="2022-08-30"/>
+        </insert>
+
+        <insert  tableName="USR_STUDENT">
+            <column  name="STUDENT_ID"  value="4"/>
+            <column  name="FULL_NAME"  value="Решетников Михаил Олегович"/>
+            <column  name="EMAIL"  value="venart-3@yandex.ru"/>
+            <column  name="GROUP_ID"  value="1"/>
+            <column  name="TUITION_TYPE"  value="COMMERCE"/>
+            <column  name="TUITION_FORM_TYPE"  value="FULL_TIME_TUITION"/>
+            <column  name="TRAINING_LEVEL_TYPE"  value="BACHELOR"/>
+            <column  name="CONDITION_TYPE"  value="IS_STUDENT"/>
+            <column  name="START_DATE"  value="2018-09-01"/>
+            <column  name="END_DATE"  value="2022-08-30"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

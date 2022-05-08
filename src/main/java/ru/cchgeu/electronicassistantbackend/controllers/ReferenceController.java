@@ -3,12 +3,15 @@ package ru.cchgeu.electronicassistantbackend.controllers;
 
 import com.google.zxing.WriterException;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestDTO;
 import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
 import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
 import ru.cchgeu.electronicassistantbackend.services.reference.ReferenceServiceImpl;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +24,13 @@ public class ReferenceController {
         this.referenceService = referenceService;
     }
 
-    @PostMapping(path = "/reference-training")
+    @PostMapping(path = "/createRequestForReference")
+    public ResponseEntity<Boolean> createRequestForReference(@RequestBody List<ReferenceRequestDTO> referenceRequestDTOList) {
+        referenceService.createRequestForReference(referenceRequestDTOList);
+        return ResponseEntity.ok(true);
+    }
+
+/*    @PostMapping(path = "/reference-training")
     public void registrationNewReference(@RequestBody UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException{
         referenceService.createReferenceTraining(userReferenceWorkDto);
     }
@@ -29,5 +38,5 @@ public class ReferenceController {
     @GetMapping("/verification")
     public Optional<User> verificationOfExistence(@RequestParam("uuid-reference") String uuidReference){
         return referenceService.verificationQRCodeReference(uuidReference);
-    }
+    }*/
 }

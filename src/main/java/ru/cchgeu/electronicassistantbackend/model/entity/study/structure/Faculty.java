@@ -27,8 +27,5 @@ public class Faculty {
     private String abbreviation;
 
     @OneToMany(mappedBy ="faculty", fetch = FetchType.LAZY)
-    private List<Department> departmentList;
-
-    @OneToMany(mappedBy ="faculty", fetch = FetchType.LAZY)
     private List<Group> groupList;
 }
