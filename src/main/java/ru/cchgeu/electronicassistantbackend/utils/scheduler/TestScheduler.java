@@ -14,11 +14,11 @@ public class TestScheduler {
 
     @Scheduled(cron = "${test.scheduler.first}")
     public void runFirst() {
-        System.out.println("First work!");
+        //System.out.println("First work!");
     }
 
     @Scheduled(cron = "${test.scheduler.second}")
     public void runSecond() {
-        System.out.println("Second work!");
+        //System.out.println("Second work!");
     }
 }

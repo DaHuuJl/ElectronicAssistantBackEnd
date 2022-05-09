@@ -36,7 +36,7 @@ public class Employee {
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
     private User user;
 

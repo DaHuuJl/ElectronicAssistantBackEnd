@@ -5,7 +5,7 @@ import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.Format
 import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.TypeReference;
 
 @Data
-public class ReferenceRequestDTO {
+public class ReferenceRequestInput {
     private FormatReference formatReference;
     private TypeReference typeReference;
     private String placePresentation;

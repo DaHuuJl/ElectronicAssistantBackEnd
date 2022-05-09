@@ -1,18 +1,11 @@
 package ru.cchgeu.electronicassistantbackend.controllers;
 
 
-import com.google.zxing.WriterException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestDTO;
-import ru.cchgeu.electronicassistantbackend.model.dto.UserReferenceWorkDto;
-import ru.cchgeu.electronicassistantbackend.model.entity.user.User;
+import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestInput;
 import ru.cchgeu.electronicassistantbackend.services.reference.ReferenceServiceImpl;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/reference",produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -24,10 +17,10 @@ public class ReferenceController {
         this.referenceService = referenceService;
     }
 
-    @PostMapping(path = "/createRequestForReference")
-    public ResponseEntity<Boolean> createRequestForReference(@RequestBody List<ReferenceRequestDTO> referenceRequestDTOList) {
-        referenceService.createRequestForReference(referenceRequestDTOList);
-        return ResponseEntity.ok(true);
+    @PostMapping(path = "/createReferenceForInput")
+    public ResponseEntity<Boolean> createRequestForReference(@RequestBody ReferenceRequestInput referenceRequestInput) {
+        referenceService.createReferenceForInput(referenceRequestInput);
+        return ResponseEntity.ok().build();
     }
 
 /*    @PostMapping(path = "/reference-training")
