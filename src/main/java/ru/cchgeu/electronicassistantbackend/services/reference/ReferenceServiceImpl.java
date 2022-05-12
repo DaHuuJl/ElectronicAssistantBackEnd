@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestInput;
 import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
-import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
+import ru.cchgeu.electronicassistantbackend.repositories.references.ReferenceRepository;
 import ru.cchgeu.electronicassistantbackend.repositories.user.UserRepository;
 import ru.cchgeu.electronicassistantbackend.services.user.StudentServiceImpl;
 import ru.cchgeu.electronicassistantbackend.utils.Guard;
