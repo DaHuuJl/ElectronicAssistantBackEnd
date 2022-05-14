@@ -1,32 +1,28 @@
 package ru.cchgeu.electronicassistantbackend.services.reference;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestDTO;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.Reference;
-import ru.cchgeu.electronicassistantbackend.model.entity.references.enums.StatusReference;
+import ru.cchgeu.electronicassistantbackend.model.dto.ReferenceRequestInput;
 import ru.cchgeu.electronicassistantbackend.model.mappers.UserMapper;
-import ru.cchgeu.electronicassistantbackend.repositories.ReferenceRepository;
+import ru.cchgeu.electronicassistantbackend.repositories.references.ReferenceRepository;
 import ru.cchgeu.electronicassistantbackend.repositories.user.UserRepository;
 import ru.cchgeu.electronicassistantbackend.services.user.StudentServiceImpl;
+import ru.cchgeu.electronicassistantbackend.utils.Guard;
 
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.Random;
 
 @Service
-public class ReferenceServiceImpl implements ReferenceService{
-
+public class ReferenceServiceImpl implements ReferenceService {
+    static final Logger logger = LogManager.getLogger(ReferenceServiceImpl.class);
     private final ReferenceRepository referenceRepository;
     private final UserRepository userRepository;
     private final StudentServiceImpl studentService;
     private static final Random RANDOM = new SecureRandom();
 
     private final UserMapper userMapper;
-
-    public static byte[] getNextSalt() {
-        byte[] salt = new byte[16];
-        RANDOM.nextBytes(salt);
-        return salt;
-    }
 
     public ReferenceServiceImpl(ReferenceRepository referenceRepository, UserRepository userRepository, StudentServiceImpl studentService, UserMapper userMapper) {
         this.referenceRepository = referenceRepository;
@@ -35,28 +31,39 @@ public class ReferenceServiceImpl implements ReferenceService{
         this.userMapper = userMapper;
     }
 
-    public void createRequestForReference(List<ReferenceRequestDTO> referenceRequestDTOList) {
-        referenceRequestDTOList
-                .forEach(this::createReference);
+    @Override
+    public void createReferenceForInput(ReferenceRequestInput referenceRequestInput) {
+        switch (referenceRequestInput.getFormatReference()) {
+            case PAPER:
+                createPaperReference(referenceRequestInput);
+                break;
+            case ELECTRONIC:
+                createElectronicReference(referenceRequestInput);
+                break;
+            default:
+                Guard.fail("error.format.reference", "There is no such reference format");
+        }
     }
 
     @Override
-    public void createReference(ReferenceRequestDTO referenceRequestDTO) {
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        Reference reference = new Reference();
-        reference.setId(UUID.randomUUID().toString());
-        reference.setFormatReference(referenceRequestDTO.getFormatReference());
-        reference.setTypeReference(referenceRequestDTO.getTypeReference());
-        reference.setStatusReference(StatusReference.PROCESS);
-        reference.setPlacePresentation(referenceRequestDTO.getPlacePresentation());
-        reference.setDateCreationRequest(sqlDate);
-        reference.setStudent(studentService.findById(1L));
-        referenceRepository.save(reference);
-        System.out.println("Создано: " + reference.toString());
+    public void createPaperReference(ReferenceRequestInput referenceRequestInput) {
+        logger.log(Level.INFO, "PAPER version created");
     }
 
-/*    public void createReferenceTraining(UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException {
+    @Override
+    public void createElectronicReference(ReferenceRequestInput referenceRequestInput) {
+        logger.log(Level.INFO, "ELECTRONIC version created");
+    }
+
+/*
+
+    public static byte[] getNextSalt() {
+        byte[] salt = new byte[16];
+        RANDOM.nextBytes(salt);
+        return salt;
+    }
+
+    public void createReferenceTraining(UserReferenceWorkDto userReferenceWorkDto) throws IOException, WriterException {
 
         LocalDateTime timeCreation = LocalDateTime.now();
 
@@ -144,5 +151,4 @@ public class ReferenceServiceImpl implements ReferenceService{
 
         return userRepository.findById(referenceRepository.findById(uuidReference).get().getStudent_id());
     }*/
-
 }

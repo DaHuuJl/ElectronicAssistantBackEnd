@@ -12,7 +12,8 @@ import ru.cchgeu.electronicassistantbackend.services.mail.TemplateEngineServiceI
 /*
     TODO: Этот контроллер создан, чтобы проверить работает ли отправка сообщений, его нужно убрать в будущем
 */
-@RestController@RequestMapping(value = "/api/mail/sender",produces = {MediaType.APPLICATION_JSON_VALUE})
+@RestController
+@RequestMapping(value = "/api/mail/sender",produces = {MediaType.APPLICATION_JSON_VALUE})
 public class MailController {
 
     private final MailSenderServiceImpl mailSenderService;

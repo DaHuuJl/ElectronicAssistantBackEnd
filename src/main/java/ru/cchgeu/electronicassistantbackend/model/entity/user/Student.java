@@ -62,7 +62,7 @@ public class Student {
     @Column(name = "END_DATE", nullable = false)
     private Date endDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
     private User user;
 

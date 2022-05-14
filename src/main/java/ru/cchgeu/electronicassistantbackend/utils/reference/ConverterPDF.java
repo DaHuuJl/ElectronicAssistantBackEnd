@@ -1,4 +1,4 @@
-package ru.cchgeu.electronicassistantbackend.utils;
+package ru.cchgeu.electronicassistantbackend.utils.reference;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
